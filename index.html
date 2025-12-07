@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartline — Your Quiet Companion</title>
+    <link rel="stylesheet" href="Heartline.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="theme-color" content="#5a4a42">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1>💗 Heartline</h1>
+            <div class="lock-section">
+                
+                <button id="theme-toggle" class="small">🎨</button>
+                <input type="password" id="unlock-input" placeholder="Enter 'guilty' to edit">
+                <button id="unlock-btn">Unlock</button>
+                <span id="lock-status">🔒 Locked</span>
+            </div>
+        </div>
+        <p>For the quiet warrior in you.</p>
+
+        <section class="section">
+            <h2>📖 Today’s Chapter
+            <span style="float: right; font-size: 14px; font-weight: normal; color: #888;"></span>
+            </h2>
+            <textarea id="journal" placeholder="Write your chapter today..."></textarea>
+            <button id="save-entry">Save Chapter</button>
+        </section>
+
+        <section class="section" id="goals">
+            <h2>🎯 My Goals</h2>
+            <div class="input-group">
+                <input type="text" id="goal-input" placeholder="What do you want to build?">
+                <div class="priority-selector">
+                    <button class="priority-btn small" data-priority="light">💙</button>
+                    <button class="priority-btn small" data-priority="medium">💛</button>
+                    <button class="priority-btn small" data-priority="deep">❤️</button>
+                </div>
+                <button id="add-goal">Add Goal</button>
+            </div>
+            <ul id="goals-list"></ul>
+        </section>
+
+        <section class="section" id="reminders">
+            <h2 id="reminder-title">🔔 Gentle</h2>
+            <div class="input-group">
+                <input type="text" id="reminder-input" placeholder="What should I remember?">
+                <input type="date" id="reminder-date">
+                <input type="time" id="reminder-time">
+                <div class="priority-selector">
+                    <button class="priority-btn small" data-priority="light">💙</button>
+                    <button class="priority-btn small" data-priority="medium">💛</button>
+                    <button class="priority-btn small" data-priority="deep">❤️</button>
+                </div>
+                <button id="add-reminder">Add Reminder</button>
+            </div>
+            <ul id="reminders-list"></ul>
+        </section>
+
+        <section class="section">
+            <h2>💾 Data Transfer</h2>
+            <div class="input-group">
+                <button id="export-btn">Export Data</button>
+                <input type="file" id="import-input" accept=".json" style="display: none;">
+                <button id="import-btn">Import Data</button>
+            </div>
+            <p style="font-size: 14px; color: #666; margin-top: 10px;">Export: Saves all your entries, goals, and reminders<br>Import: Replaces current data with imported file</p>
+        </section>
+        
+        <section class="section">
+            <h2>📜 Past Chapters</h2>
+            <div id="history"></div>
+        </section>
+    </div>
+    
+    <section class="section locked-hidden" id="theme-creation">
+    <h2>🛠️ Add New Theme Script</h2>
+    <div class="input-group">
+        <textarea id="theme-script-input" 
+                    placeholder="Paste your Theme Script here (e.g., THEME_LIST.push('my-new-theme');)..." 
+                    style="min-height: 80px;"></textarea>
+    </div>
+    <button id="execute-theme-script">Execute Theme Script</button>
+    <p style="font-size: 14px; color: #666; margin-top: 10px;">
+        **Warning:** Only paste trusted JavaScript code here. This allows you to add new themes, rules, or lists without editing the core file.
+    </p>
+</section>
+
+<section class="section">
+
+    <script src="heart.js"></script>
+    <div id="theme-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Choose Your Heartline Theme</h2>
+            <div id="theme-list-container">
+                </div>
+        </div>
+    </div>
+
+    <div id="chapter-edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="chapter-close">&times;</span> 
+            <h2 id="chapter-edit-title">Edit Chapter for [Date Placeholder]</h2>
+            <textarea id="chapter-edit-textarea" style="min-height: 200px;"></textarea>
+            <button id="chapter-update-btn">Update Chapter</button>
+            <button id="chapter-delete-btn" class="delete-btn">Delete Chapter</button>
+        </div>
+    </div>
+</section>
+</body>
+</html>
